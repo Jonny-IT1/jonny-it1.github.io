@@ -186,21 +186,50 @@
     });
   }
 
-  /* ================= 7. 3D tilt (subtle) ================= */
+  /* ================= 7. Wobbly windows (Compiz-style spring) ================= */
   if (!reduced && finePointer) {
-    $$("[data-tilt]").forEach(function (el) {
-      var strength = 3;
-      el.style.transformStyle = "preserve-3d";
-      el.addEventListener("mousemove", function (ev) {
-        var r = el.getBoundingClientRect();
-        var x = (ev.clientX - r.left) / r.width - 0.5;
-        var y = (ev.clientY - r.top) / r.height - 0.5;
-        el.style.transform =
-          "perspective(900px) rotateX(" + (-y * strength).toFixed(2) + "deg) rotateY(" +
-          (x * strength).toFixed(2) + "deg) translateY(-5px)";
+    $$("[data-wobble]").forEach(function (win) {
+      var hero = win.closest(".hero");
+      if (!hero) return;
+      var tx = 0, ty = 0;   /* target offset */
+      var px = 0, py = 0;   /* current offset */
+      var vx = 0, vy = 0;   /* velocity */
+      var raf = null;
+      var K = 0.12;         /* spring stiffness */
+      var D = 0.70;         /* damping: < 1 => overshoot wobble */
+
+      function loop() {
+        vx = (vx + (tx - px) * K) * D;
+        vy = (vy + (ty - py) * K) * D;
+        px += vx;
+        py += vy;
+        var rot = Math.max(-5, Math.min(5, vx * 0.85));
+        win.style.transform =
+          "translate(" + px.toFixed(2) + "px," + py.toFixed(2) + "px) rotate(" +
+          rot.toFixed(2) + "deg)";
+        var moving = Math.abs(px - tx) > 0.05 || Math.abs(py - ty) > 0.05 ||
+                     Math.abs(vx) > 0.02 || Math.abs(vy) > 0.02;
+        if (moving) {
+          raf = requestAnimationFrame(loop);
+        } else {
+          raf = null;
+          win.style.transform = "";
+        }
+      }
+      function kick() {
+        win.classList.add("is-wobble");
+        if (raf === null) raf = requestAnimationFrame(loop);
+      }
+      hero.addEventListener("mousemove", function (ev) {
+        var r = hero.getBoundingClientRect();
+        tx = ((ev.clientX - r.left) / r.width - 0.5) * 26;
+        ty = ((ev.clientY - r.top) / r.height - 0.5) * 20;
+        kick();
       });
-      el.addEventListener("mouseleave", function () {
-        el.style.transform = "";
+      hero.addEventListener("mouseleave", function () {
+        tx = 0;
+        ty = 0;
+        kick();
       });
     });
   }
@@ -454,11 +483,11 @@
   }
 
   var BOOT = [
-    "[    0.000000] terminal-toolkit v2.6: booting ...",
-    "[    0.084231] gruvbox: color profile loaded (dark, hard)",
-    "[    0.152407] i3: workspaces mounted [1] [2] [3]",
-    "[    0.221866] tmux: session 'main' attached",
-    "[    0.310502] ready."
+    "[    0.000000] gnome-shell 46: entering stage ...",
+    "[    0.041262] yaru: theme loaded (dark)",
+    "[    0.102388] blur-my-shell: pipelines connected",
+    "[    0.175445] wobbly-windows: springs armed",
+    "[    0.250912] ready."
   ];
 
   function typeTerm(body, key) {
@@ -545,21 +574,4 @@
     typeTerm(body, body.getAttribute("data-term"));
   });
 
-  /* ================= 12. Subtle parallax on hero visual ================= */
-  if (!reduced && finePointer) {
-    var visual = $(".hero-visual");
-    var hero = $(".hero");
-    if (visual && hero) {
-      hero.addEventListener("mousemove", function (ev) {
-        var r = hero.getBoundingClientRect();
-        var x = (ev.clientX - r.left) / r.width - 0.5;
-        var y = (ev.clientY - r.top) / r.height - 0.5;
-        visual.style.transform =
-          "translate(" + (x * 10).toFixed(1) + "px," + (y * 8).toFixed(1) + "px)";
-      });
-      hero.addEventListener("mouseleave", function () {
-        visual.style.transform = "";
-      });
-    }
-  }
 })();
