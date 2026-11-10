@@ -45,6 +45,22 @@
     });
   }
 
+  /* ================= 1b. WM bar clock ================= */
+  (function clock() {
+    var el = $("#clock");
+    if (!el) return;
+    var DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    function pad(n) { return n < 10 ? "0" + n : "" + n; }
+    function update() {
+      var d = new Date();
+      el.textContent = DAYS[d.getDay()] + " " + pad(d.getDate()) + " " +
+        MONTHS[d.getMonth()] + "  " + pad(d.getHours()) + ":" + pad(d.getMinutes());
+    }
+    update();
+    setInterval(update, 10000);
+  })();
+
   /* ================= 2. Mobile nav ================= */
   var toggle = $(".nav-toggle");
   function closeNav() {
@@ -422,7 +438,7 @@
     if (!steps) return;
     if (reduced) {
       steps.forEach(function (s) {
-        if (s.c !== undefined) addCmdLine(body, s.c, s.p !== undefined ? s.p : "$");
+        if (s.c !== undefined) addCmdLine(body, s.c, s.p !== undefined ? s.p : "❯");
         if (s.o) s.o.forEach(function (l) { addOutLine(body, l.t, l.cls); });
       });
       return;
@@ -449,7 +465,7 @@
       }
       var s = steps[idx];
       if (s.c !== undefined) {
-        var prompt = s.p !== undefined ? s.p : "$";
+        var prompt = s.p !== undefined ? s.p : "❯";
         var ln = addLine();
         var p = document.createElement("span");
         p.className = "p";
