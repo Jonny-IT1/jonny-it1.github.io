@@ -126,19 +126,29 @@
     revealEls.forEach(function (el) { el.classList.add("in"); });
   }
 
-  /* ================= 5. Animated counters ================= */
+  /* ================= 5. Animated counters (scramble/decrypt) ================= */
   function animateCounter(el) {
     var target = parseFloat(el.getAttribute("data-counter")) || 0;
     var suffix = el.getAttribute("data-suffix") || "";
     var prefix = el.getAttribute("data-prefix") || "";
-    var dur = 1400;
+    var digits = String(Math.round(target));
+    var GLYPHS = "0123456789";
+    var dur = 1100;
     var start = null;
     function step(ts) {
       if (!start) start = ts;
       var t = Math.min((ts - start) / dur, 1);
       var eased = 1 - Math.pow(1 - t, 3);
-      el.textContent = prefix + Math.round(target * eased).toLocaleString("en-US") + suffix;
+      var resolved = Math.floor(eased * digits.length);
+      var out = "";
+      for (var i = 0; i < digits.length; i++) {
+        out += i < resolved
+          ? digits.charAt(i)
+          : GLYPHS.charAt(Math.floor(Math.random() * GLYPHS.length));
+      }
+      el.textContent = prefix + out + suffix;
       if (t < 1) requestAnimationFrame(step);
+      else el.textContent = prefix + digits + suffix;
     }
     requestAnimationFrame(step);
   }
@@ -176,10 +186,10 @@
     });
   }
 
-  /* ================= 7. 3D tilt ================= */
+  /* ================= 7. 3D tilt (subtle) ================= */
   if (!reduced && finePointer) {
     $$("[data-tilt]").forEach(function (el) {
-      var strength = 5;
+      var strength = 3;
       el.style.transformStyle = "preserve-3d";
       el.addEventListener("mousemove", function (ev) {
         var r = el.getBoundingClientRect();
@@ -265,7 +275,17 @@
     var W = 0, H = 0;
     var rafId = null;
     var inView = true;
-    var accentCol = getComputedStyle(document.body).getPropertyValue("--a1").trim() || "#22d3ee";
+    var accentCol = getComputedStyle(document.body).getPropertyValue("--a1").trim() || "#fabd2f";
+
+    function hexToRgb(h) {
+      h = h.replace("#", "");
+      if (h.length === 3) {
+        h = h.split("").map(function (c) { return c + c; }).join("");
+      }
+      var n = parseInt(h, 16);
+      return isNaN(n) ? [120, 160, 255] : [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+    }
+    var accentRgb = hexToRgb(accentCol);
 
     function isMobile() { return window.innerWidth < 720; }
 
@@ -310,7 +330,7 @@
           var lim = linkDist * linkDist;
           if (d2 < lim) {
             var a = (1 - Math.sqrt(d2) / linkDist) * 0.22;
-            ctx.strokeStyle = "rgba(120, 160, 255," + a.toFixed(3) + ")";
+            ctx.strokeStyle = "rgba(" + accentRgb[0] + "," + accentRgb[1] + "," + accentRgb[2] + "," + a.toFixed(3) + ")";
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
@@ -433,10 +453,19 @@
     body.appendChild(ln);
   }
 
+  var BOOT = [
+    "[    0.000000] terminal-toolkit v2.6: booting ...",
+    "[    0.084231] gruvbox: color profile loaded (dark, hard)",
+    "[    0.152407] i3: workspaces mounted [1] [2] [3]",
+    "[    0.221866] tmux: session 'main' attached",
+    "[    0.310502] ready."
+  ];
+
   function typeTerm(body, key) {
     var steps = SCRIPTS[key];
     if (!steps) return;
     if (reduced) {
+      BOOT.forEach(function (b) { addOutLine(body, b, "dim"); });
       steps.forEach(function (s) {
         if (s.c !== undefined) addCmdLine(body, s.c, s.p !== undefined ? s.p : "❯");
         if (s.o) s.o.forEach(function (l) { addOutLine(body, l.t, l.cls); });
@@ -453,6 +482,16 @@
       body.appendChild(ln);
       body.scrollTop = body.scrollHeight;
       return ln;
+    }
+
+    function runBoot(idx, done) {
+      if (idx >= BOOT.length) {
+        setTimeout(done, 350);
+        return;
+      }
+      var ln = addLine("dim");
+      ln.textContent = BOOT[idx];
+      setTimeout(function () { runBoot(idx + 1, done); }, 95);
     }
 
     function runStep(idx) {
@@ -499,7 +538,7 @@
         })();
       }
     }
-    runStep(0);
+    runBoot(0, function () { runStep(0); });
   }
 
   $$("[data-term]").forEach(function (body) {

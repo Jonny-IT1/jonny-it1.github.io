@@ -17,16 +17,17 @@
 *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #111318;
-  --bg-2: #15181e;
-  --panel: #181b21;
-  --panel-2: #1d2128;
-  --text: #e8e3d5;
-  --muted: #9b968a;
-  --dim: #6b675e;
-  --line: rgba(235, 219, 178, 0.10);
-  --line-strong: rgba(235, 219, 178, 0.22);
-  --radius: 6px;
+  --bg: #1d2021;
+  --bg-2: #222522;
+  --panel: #282828;
+  --panel-2: #32302f;
+  --text: #fbf1c7;
+  --muted: #bdae93;
+  --dim: #7c6f64;
+  --line: rgba(235, 219, 178, 0.08);
+  --line-strong: rgba(235, 219, 178, 0.18);
+  --radius: 2px;
+  --btn-dark: #1d2021;
   /* gruvbox-inspired accents */
   --orange: #fe8019;
   --yellow: #fabd2f;
@@ -64,7 +65,7 @@ svg { display: block; }
 
 p { overflow-wrap: break-word; }
 
-::selection { background: rgba(254, 128, 25, 0.30); color: #fff; }
+::selection { background: #fabd2f; color: #1d2021; }
 
 a:focus-visible,
 button:focus-visible {
@@ -73,9 +74,9 @@ button:focus-visible {
 }
 
 /* thin console-style scrollbars */
-* { scrollbar-width: thin; scrollbar-color: #2c313a transparent; }
+* { scrollbar-width: thin; scrollbar-color: #3c3836 transparent; }
 ::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-thumb { background: #2c313a; border-radius: 0; }
+::-webkit-scrollbar-thumb { background: #3c3836; border-radius: 0; }
 ::-webkit-scrollbar-thumb:hover { background: var(--a1); }
 ::-webkit-scrollbar-track { background: transparent; }
 
@@ -172,9 +173,9 @@ body.cursor-on .cursor-glow { opacity: 1; }
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-  background: rgba(17, 19, 24, 0.94);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
+  background: rgba(29, 32, 33, 0.94);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
   transition: box-shadow 0.35s;
 }
@@ -203,7 +204,7 @@ body.cursor-on .cursor-glow { opacity: 1; }
   display: grid;
   place-items: center;
   background: var(--a1);
-  color: #131519;
+  color: #1d2021;
   flex: none;
   transition: filter 0.25s;
 }
@@ -317,7 +318,7 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate
 
 .btn-primary {
   background: var(--a1);
-  color: #131519;
+  color: #1d2021;
   box-shadow: 0 8px 26px -12px color-mix(in srgb, var(--a1) 70%, transparent);
 }
 .btn-primary:hover {
@@ -484,16 +485,13 @@ section { padding-block: clamp(56px, 9vw, 110px); }
 }
 
 .hero-visual .term {
-  transform: rotateY(-7deg) rotateX(4deg) translateZ(0);
-  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
-  animation: floaty 7s ease-in-out infinite;
+  animation: wmOpen 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.15s backwards;
 }
-@media (hover: hover) {
-  .hero-visual:hover .term { transform: rotateY(0deg) rotateX(0deg); }
-}
-@keyframes floaty {
-  0%, 100% { translate: 0 0; }
-  50% { translate: 0 -12px; }
+/* tiling-WM style window placement animation */
+@keyframes wmOpen {
+  from { opacity: 0; transform: translateY(18px) scaleY(0.94); }
+  55% { opacity: 1; }
+  to { opacity: 1; transform: none; }
 }
 
 canvas.net {
@@ -511,7 +509,16 @@ canvas.net {
   border: 1px solid var(--line-strong);
   overflow: hidden;
   position: relative;
-  box-shadow: 0 34px 70px -28px rgba(0, 0, 0, 0.85);
+  box-shadow: 0 24px 56px -26px rgba(0, 0, 0, 0.9);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+/* focused-window border, like a tiling WM highlight */
+@media (hover: hover) {
+  .term:hover {
+    border-color: color-mix(in srgb, var(--a1) 70%, transparent);
+    box-shadow: 0 24px 56px -26px rgba(0, 0, 0, 0.9),
+      0 0 0 1px color-mix(in srgb, var(--a1) 28%, transparent);
+  }
 }
 /* top hairline */
 .term::before {
@@ -539,8 +546,8 @@ canvas.net {
 .term-head {
   display: flex;
   align-items: center;
-  gap: 4px;
-  padding: 10px 14px;
+  gap: 10px;
+  padding: 9px 12px;
   border-bottom: 1px solid var(--line);
   background: var(--panel-2);
   font-family: var(--font-mono);
@@ -550,13 +557,51 @@ canvas.net {
 /* PS1-style title: green user@host, blue path */
 .term-user { color: var(--green); white-space: nowrap; }
 .term-path { color: var(--blue); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-/* GNOME-style window controls */
+/* window manager control buttons (xfwm/redmond style squares) */
 .term-actions {
   margin-left: auto;
-  color: var(--dim);
-  letter-spacing: 5px;
+  display: inline-flex;
+  gap: 6px;
   user-select: none;
   white-space: nowrap;
+}
+.wa {
+  width: 22px;
+  height: 16px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #504945;
+  background: #282828;
+  color: #a89984;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1;
+  border-radius: 0;
+  cursor: default;
+  transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.18s;
+}
+.wa:hover { color: var(--text); transform: translateY(-1px); }
+.wa-min:hover { background: #b8bb26; border-color: #b8bb26; color: #1d2021; }
+.wa-max:hover { background: #fabd2f; border-color: #fabd2f; color: #1d2021; }
+.wa-close:hover { background: #fb4934; border-color: #fb4934; color: #1d2021; }
+
+/* slow CRT scanline sweep across the window */
+.term-scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -14%;
+  height: 46px;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(180deg, transparent, rgba(251, 240, 193, 0.05), transparent);
+  animation: sweep 8s linear infinite;
+}
+@keyframes sweep {
+  0% { top: -14%; opacity: 0; }
+  6% { opacity: 1; }
+  94% { opacity: 1; }
+  100% { top: 106%; opacity: 0; }
 }
 
 .term-body {
@@ -592,7 +637,7 @@ canvas.net {
   overflow: hidden;
   border-radius: var(--radius);
   border: 1px solid var(--line);
-  background: linear-gradient(180deg, var(--panel-2), var(--panel));
+  background: var(--panel);
   transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), border-color 0.3s, box-shadow 0.3s;
 }
 .glass::after {
@@ -607,8 +652,8 @@ canvas.net {
 @media (hover: hover) {
   .glass:hover {
     border-color: color-mix(in srgb, var(--a1) 45%, transparent);
-    transform: translateY(-4px);
-    box-shadow: 0 22px 48px -26px rgba(0, 0, 0, 0.85);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 38px -24px rgba(0, 0, 0, 0.85);
   }
   .glass:hover::after { opacity: 1; }
 }
@@ -683,7 +728,7 @@ canvas.net {
   border-radius: var(--radius);
   display: grid;
   place-items: center;
-  color: #131519;
+  color: #1d2021;
   transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
   flex: none;
 }
@@ -875,7 +920,7 @@ canvas.net {
   align-items: center;
   gap: 7px;
   padding: 7px 13px;
-  border-radius: 4px;
+  border-radius: var(--radius);
   border: 1px solid var(--line-strong);
   background: var(--panel-2);
   color: var(--muted);
@@ -936,7 +981,7 @@ canvas.net {
   color: var(--a1);
   background: color-mix(in srgb, var(--a1) 9%, transparent);
   border: 1px solid color-mix(in srgb, var(--a1) 30%, transparent);
-  border-radius: 4px;
+  border-radius: var(--radius);
   padding: 7px 12px;
   white-space: nowrap;
 }
@@ -979,7 +1024,7 @@ canvas.net {
 /* ---------- 20. Footer: tmux-style status bar ---------- */
 footer {
   border-top: 1px solid var(--line);
-  background: #14161b;
+  background: #1d2021;
   position: relative;
   overflow: hidden;
 }
@@ -1005,7 +1050,7 @@ a.fseg { transition: color 0.2s, background 0.2s; }
 }
 .fseg-accent {
   background: var(--a1);
-  color: #131519;
+  color: #1d2021;
   font-weight: 700;
 }
 .fseg-right {
@@ -1049,7 +1094,7 @@ a.fseg { transition: color 0.2s, background 0.2s; }
 /* ---------- 22. Reveal animations ---------- */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(26px) scale(0.985);
   transition: opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
   will-change: opacity, transform;
 }
@@ -1157,4 +1202,6 @@ a.fseg { transition: color 0.2s, background 0.2s; }
   .reveal, .fade, .word, .hero-meta .chip { opacity: 1 !important; transform: none !important; }
   .marquee-track { animation: none; transform: none; }
   .cursor-glow { display: none; }
+  .term-scan { display: none; }
+  .hero-visual .term { animation: none; opacity: 1; }
 }
