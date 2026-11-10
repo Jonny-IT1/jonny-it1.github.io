@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TermiAgent — Universal Terminal AI Coding Agent</title>
+  <meta name="description" content="TermiAgent is an autonomous terminal AI coding agent that connects to any LLM provider or local model — vision input, image generation, file editing and shell execution included." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23a78bfa'/%3E%3Cstop offset='1' stop-color='%23f472b6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Cpath d='M12 10l-6 6 6 6M20 10l6 6-6 6' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-accent="ta">
+
+  <div class="bg" aria-hidden="true">
+    <div class="orb o1"></div>
+    <div class="orb o2"></div>
+    <div class="orb o3"></div>
+    <div class="grid"></div>
+  </div>
+
+  <div class="progress" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="brand" href="index.html">
+      <span class="logo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#05070d" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6l-5 6 5 6"/><path d="M16 6l5 6-5 6"/></svg>
+      </span>
+      Terminal Toolkit
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="index.html">Overview</a>
+      <a href="contextcraft.html">ContextCraft</a>
+      <a href="termiagent.html">TermiAgent</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Menu" aria-hidden="true" type="button">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <canvas class="net" aria-hidden="true"></canvas>
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">Autonomous &middot; Universal &middot; Terminal</span>
+          <h1 class="hero-title">
+            <span class="word" style="animation-delay:.05s">One agent.</span><br />
+            <span class="word grad-text" style="animation-delay:.15s">Every model.</span>
+          </h1>
+          <p class="hero-sub">
+            <strong>TermiAgent</strong> is an open-source AI coding agent that lives in your terminal.
+            It inspects codebases, edits files, runs commands and generates images — powered by any
+            cloud provider or a 100% local LLM. Switch models live, mid-conversation.
+          </p>
+          <div class="hero-cta">
+            <button class="cmd-pill" type="button" data-copy="pip install termiagent">
+              <span class="dollar">$</span> pip install termiagent
+              <svg class="copy-mini" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            </button>
+          </div>
+          <div class="hero-meta">
+            <span class="chip c3">Python 3.9+</span>
+            <span class="chip c4">Vision &amp; image generation</span>
+            <span class="chip c3">REPL + one-shot mode</span>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="glow" aria-hidden="true"></div>
+          <div class="term">
+            <div class="term-head">
+              <div class="dots"><span></span><span></span><span></span></div>
+              <span class="term-title">termiagent — zsh</span>
+            </div>
+            <div class="term-body" data-term="ta"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROVIDER MARQUEE ============ -->
+    <section style="padding-top:0">
+      <div class="wrap">
+        <div class="section-head reveal" style="text-align:center;margin-inline:auto">
+          <span class="eyebrow">Zero lock-in</span>
+          <h2 class="section-title">Bring <span class="grad-text">any</span> model</h2>
+        </div>
+      </div>
+      <div class="marquee reveal" aria-label="Supported AI providers">
+        <div class="marquee-track">
+          <span class="chip c3">Google Gemini</span>
+          <span class="chip c3">Anthropic Claude</span>
+          <span class="chip c3">OpenAI GPT</span>
+          <span class="chip c3">DeepSeek</span>
+          <span class="chip c3">Mistral</span>
+          <span class="chip c3">MiniMax</span>
+          <span class="chip c3">Cohere</span>
+          <span class="chip c3">Perplexity</span>
+          <span class="chip c3">Together AI</span>
+          <span class="chip c3">Fireworks</span>
+          <span class="chip c3">Groq</span>
+          <span class="chip c3">HuggingFace</span>
+          <span class="chip c4">Ollama</span>
+          <span class="chip c4">vLLM</span>
+          <span class="chip c4">LM Studio</span>
+          <span class="chip c4">Jan</span>
+          <span class="chip c3">Google Gemini</span>
+          <span class="chip c3">Anthropic Claude</span>
+          <span class="chip c3">OpenAI GPT</span>
+          <span class="chip c3">DeepSeek</span>
+          <span class="chip c3">Mistral</span>
+          <span class="chip c3">MiniMax</span>
+          <span class="chip c3">Cohere</span>
+          <span class="chip c3">Perplexity</span>
+          <span class="chip c3">Together AI</span>
+          <span class="chip c3">Fireworks</span>
+          <span class="chip c3">Groq</span>
+          <span class="chip c3">HuggingFace</span>
+          <span class="chip c4">Ollama</span>
+          <span class="chip c4">vLLM</span>
+          <span class="chip c4">LM Studio</span>
+          <span class="chip c4">Jan</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURES ============ -->
+    <section>
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Key features</span>
+          <h2 class="section-title">An agent that <span class="grad-text">actually acts</span></h2>
+        </div>
+        <div class="grid-cards stagger">
+          <div class="card glass">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+            </div>
+            <h3>Universal providers</h3>
+            <p>Connect frontier clouds or run fully offline with Ollama, vLLM, LM Studio and Jan. Modern, legacy and vision models are all in the catalog.</p>
+          </div>
+          <div class="card glass">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <h3>Multimodal vision</h3>
+            <p>Drop screenshots, diagrams and UI mockups into the conversation and let vision models understand them natively.</p>
+          </div>
+          <div class="card glass">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            </div>
+            <h3>Image generation</h3>
+            <p>A native generate_image tool produces diagrams, mockups and visual assets straight from text prompts.</p>
+          </div>
+          <div class="card glass">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+            </div>
+            <h3>Live model switching</h3>
+            <p>Switch the active model mid-conversation with a single slash command — cloud to local and back, without losing context.</p>
+          </div>
+          <div class="card glass">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6"/><path d="M12 19h8"/></svg>
+            </div>
+            <h3>Autonomous tools</h3>
+            <p>view_file, write_file, edit_file, search_codebase, generate_image and run_shell_command — a complete toolbelt for real work.</p>
+          </div>
+          <div class="card glass">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M8 7l4-4 4 4"/><path d="M8 17l4 4 4-4"/></svg>
+            </div>
+            <h3>Python SDK inside</h3>
+            <p>Import the agent into your own Python projects and run turns programmatically — the CLI is only the beginning.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ REPL + ONE-SHOT ============ -->
+    <section>
+      <div class="wrap split">
+        <div class="reveal">
+          <span class="eyebrow">Usage</span>
+          <h2 class="section-title">Chat, command, <span class="grad-text">or script</span></h2>
+          <p class="lead">
+            Start an interactive Rich-powered REPL in your project directory, or fire a
+            single instruction from the command line and let the agent work.
+          </p>
+          <div class="cmd-list">
+            <div class="cmd-item">
+              <code class="sig">termiagent</code>
+              <p>Start the interactive chat mode in any project directory.</p>
+            </div>
+            <div class="cmd-item">
+              <code class="sig">termiagent -p "…"</code>
+              <p>One-shot mode: run a single instruction directly from the command line.</p>
+            </div>
+          </div>
+          <div class="chips" style="margin-top:22px">
+            <span class="chip">/model</span>
+            <span class="chip">/clear</span>
+            <span class="chip">/history</span>
+            <span class="chip">/help</span>
+            <span class="chip">/exit</span>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="code">
+            <button class="copy-btn" type="button" data-copy="from termiagent import TermiAgent, UniversalLLMProvider
+
+provider = UniversalLLMProvider(model_name=&quot;gemini/gemini-2.0-flash&quot;)
+agent = TermiAgent(provider=provider, work_dir=&quot;./my_project&quot;)
+response = agent.run_turn(&quot;Refactor main.py to use async functions&quot;)">copy</button>
+<pre><span class="k">from</span> <span class="f">termiagent</span> <span class="k">import</span> TermiAgent, UniversalLLMProvider
+
+<span class="cm"># 1. Pick any provider - cloud or local</span>
+provider = <span class="f">UniversalLLMProvider</span>(
+    model_name=<span class="s">"gemini/gemini-2.0-flash"</span>
+)
+
+<span class="cm"># 2. Instantiate the agent in a target directory</span>
+agent = <span class="f">TermiAgent</span>(provider=provider, work_dir=<span class="s">"./my_project"</span>)
+
+<span class="cm"># 3. Execute a turn programmatically</span>
+response = agent.<span class="f">run_turn</span>(<span class="s">"Refactor main.py to use async functions"</span>)
+<span class="f">print</span>(<span class="s">"Agent response:"</span>, response)</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STATS ============ -->
+    <section>
+      <div class="wrap">
+        <div class="stats stagger">
+          <div class="stat glass">
+            <div class="num" data-counter="20" data-suffix="+">0</div>
+            <div class="lbl">AI providers, from frontier clouds to fully local</div>
+          </div>
+          <div class="stat glass">
+            <div class="num" data-counter="6">0</div>
+            <div class="lbl">autonomous agent tools for files, search, shell and images</div>
+          </div>
+          <div class="stat glass">
+            <div class="num" data-counter="100" data-suffix="%">0%</div>
+            <div class="lbl">offline capable with Ollama, vLLM, LM Studio or Jan</div>
+          </div>
+          <div class="stat glass">
+            <div class="num" data-counter="1">0</div>
+            <div class="lbl">command to switch models live mid-conversation</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PAGE NAV ============ -->
+    <section>
+      <div class="wrap page-nav">
+        <a class="pn glass" href="contextcraft.html">
+          <span class="dir">&larr; Previous</span>
+          <span class="name">ContextCraft</span>
+        </a>
+        <a class="pn right glass" href="index.html">
+          <span class="dir">Overview &rarr;</span>
+          <span class="name">All tools</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>Terminal Toolkit — two open-source tools for the terminal-native developer.</span>
+      <span class="mono">MIT Licensed &middot; No tracking &middot; No cookies</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

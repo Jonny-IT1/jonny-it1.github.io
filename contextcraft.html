@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ContextCraft — AI Codebase Context Packer &amp; Token Budgeter</title>
+  <meta name="description" content="ContextCraft packs repositories into clean, token-optimized context prompts for any LLM — via CLI, web dashboard or Python SDK." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%2334d399'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Cpath d='M12 10l-6 6 6 6M20 10l6 6-6 6' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-accent="cc">
+
+  <div class="bg" aria-hidden="true">
+    <div class="orb o1"></div>
+    <div class="orb o2"></div>
+    <div class="orb o3"></div>
+    <div class="grid"></div>
+  </div>
+
+  <div class="progress" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="brand" href="index.html">
+      <span class="logo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#05070d" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6l-5 6 5 6"/><path d="M16 6l5 6-5 6"/></svg>
+      </span>
+      Terminal Toolkit
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="index.html">Overview</a>
+      <a href="contextcraft.html">ContextCraft</a>
+      <a href="termiagent.html">TermiAgent</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Menu" aria-hidden="true" type="button">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <canvas class="net" aria-hidden="true"></canvas>
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">Context &middot; Packing &middot; Precision</span>
+          <h1 class="hero-title">
+            <span class="word" style="animation-delay:.05s">Feed any LLM</span><br />
+            <span class="word grad-text" style="animation-delay:.15s">your entire codebase.</span>
+          </h1>
+          <p class="hero-sub">
+            <strong>ContextCraft</strong> is a next-gen codebase context packer and visual token budgeter.
+            It scans repositories, strips them down to AST signatures and packs clean,
+            token-optimized prompts — via a fast CLI, a sleek web dashboard or a Python SDK.
+          </p>
+          <div class="hero-cta">
+            <button class="cmd-pill" type="button" data-copy="pip install contextcraft">
+              <span class="dollar">$</span> pip install contextcraft
+              <svg class="copy-mini" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            </button>
+          </div>
+          <div class="hero-meta">
+            <span class="chip c1">Python 3.9+</span>
+            <span class="chip c2">MIT License</span>
+            <span class="chip c1">CLI · Web UI · SDK</span>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="glow" aria-hidden="true"></div>
+          <div class="term">
+            <div class="term-head">
+              <div class="dots"><span></span><span></span><span></span></div>
+              <span class="term-title">contextcraft — zsh</span>
+            </div>
+            <div class="term-body" data-term="cc"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PIPELINE ============ -->
+    <section>
+      <div class="wrap">
+        <div class="section-head reveal" style="text-align:center;margin-inline:auto">
+          <span class="eyebrow">How it works</span>
+          <h2 class="section-title">Codebase in, <span class="grad-text">context out</span></h2>
+        </div>
+        <div class="pipeline reveal">
+          <div class="node glass">
+            <div class="ni">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h4>Codebase</h4>
+            <p>.py · .ts · .rs …</p>
+          </div>
+          <div class="flow" aria-hidden="true"></div>
+          <div class="node glass">
+            <div class="ni">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6l-5 6 5 6"/><path d="M16 6l5 6-5 6"/></svg>
+            </div>
+            <h4>ContextCraft Engine</h4>
+            <p>Scanner + AST + Tokens</p>
+          </div>
+          <div class="flow" aria-hidden="true"></div>
+          <div class="node glass">
+            <div class="ni">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h4>LLM Context</h4>
+            <p>Markdown · XML · JSON</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURES ============ -->
+    <section>
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Key features</span>
+          <h2 class="section-title">Every token, <span class="grad-text">accounted for</span></h2>
+        </div>
+        <div class="grid-cards stagger">
+          <div class="card glass">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.12 15.88"/><path d="M14.47 14.48L20 20"/><path d="M8.12 8.12L12 12"/></svg>
+            </div>
+            <h3>AST signature pruning</h3>
+            <p>Extract class and function signatures while stripping implementation bodies — saving 70% to 90% of tokens per prompt.</p>
+          </div>
+          <div class="card glass">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+            </div>
+            <h3>Real-time token budgeting</h3>
+            <p>Accurate per-file token counts keep every prompt inside your model's context window. Never hit a limit unexpectedly again.</p>
+          </div>
+          <div class="card glass">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6M3 12h6M15 12h6M5.6 5.6l4.2 4.2M14.2 14.2l4.2 4.2M18.4 5.6l-4.2 4.2M9.8 14.2l-4.2 4.2"/></svg>
+            </div>
+            <h3>Git-diff mode</h3>
+            <p>Pack only modified or staged files for focused, diff-driven prompts — ideal for code reviews and incremental tasks.</p>
+          </div>
+          <div class="card glass">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3"/><path d="M7 9l3 2-3 2M13 13h4"/></svg>
+            </div>
+            <h3>Dual interface</h3>
+            <p>A lightning-fast CLI for scripting plus a sleek dark-mode web dashboard for exploring token budgets interactively.</p>
+          </div>
+          <div class="card glass">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
+            </div>
+            <h3>Git-aware filtering</h3>
+            <p>Respects .gitignore and automatically filters binaries and build artifacts, so only meaningful source reaches the prompt.</p>
+          </div>
+          <div class="card glass">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg>
+            </div>
+            <h3>Multi-format output</h3>
+            <p>Emit prompts as Markdown, structured XML with file paths, or machine-readable JSON — whatever your pipeline expects.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CLI + SDK ============ -->
+    <section>
+      <div class="wrap split">
+        <div class="reveal">
+          <span class="eyebrow">Interfaces</span>
+          <h2 class="section-title">Three commands. <span class="grad-text">That's it.</span></h2>
+          <p class="lead">
+            Everything ContextCraft does is one command away — and every command
+            is also a Python function when you need it inside your own agents and workflows.
+          </p>
+          <div class="cmd-list">
+            <div class="cmd-item">
+              <code class="sig">pack</code>
+              <p>Pack the codebase into a single AI-ready context prompt, with flags for format, signature pruning, git-diff and token limits.</p>
+            </div>
+            <div class="cmd-item">
+              <code class="sig">stats</code>
+              <p>Display a full token breakdown table of the codebase before packing anything.</p>
+            </div>
+            <div class="cmd-item">
+              <code class="sig">ui</code>
+              <p>Launch the local interactive web dashboard for visual token budgeting.</p>
+            </div>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="code">
+            <button class="copy-btn" type="button" data-copy="import contextcraft
+
+prompt = contextcraft.pack_codebase(
+    root_dir=&quot;./my_project&quot;,
+    output_format=&quot;markdown&quot;,
+    signatures_only=True,
+    max_tokens=100000,
+)
+
+stats = contextcraft.get_codebase_stats(&quot;./my_project&quot;)">copy</button>
+<pre><span class="k">import</span> <span class="f">contextcraft</span>
+
+<span class="cm"># Pack a repo into a token-optimized prompt</span>
+prompt = contextcraft.<span class="f">pack_codebase</span>(
+    root_dir=<span class="s">"./my_project"</span>,
+    output_format=<span class="s">"markdown"</span>,  <span class="cm"># md | xml | json</span>
+    signatures_only=<span class="k">True</span>,         <span class="cm"># AST pruning</span>
+    max_tokens=<span class="n">100000</span>,
+)
+
+<span class="cm"># Repo token stats</span>
+stats = contextcraft.<span class="f">get_codebase_stats</span>(<span class="s">"./my_project"</span>)
+<span class="f">print</span>(stats[<span class="s">"total_estimated_tokens"</span>])</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STATS ============ -->
+    <section>
+      <div class="wrap">
+        <div class="stats stagger">
+          <div class="stat glass">
+            <div class="num" data-counter="90" data-suffix="%">0%</div>
+            <div class="lbl">token savings with signatures-only AST pruning</div>
+          </div>
+          <div class="stat glass">
+            <div class="num" data-counter="3">0</div>
+            <div class="lbl">output formats: Markdown, XML and JSON</div>
+          </div>
+          <div class="stat glass">
+            <div class="num" data-counter="2">0</div>
+            <div class="lbl">interfaces: fast CLI and interactive web dashboard</div>
+          </div>
+          <div class="stat glass">
+            <div class="num" data-counter="1">0</div>
+            <div class="lbl">import line to embed it in your own AI agents</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PAGE NAV ============ -->
+    <section>
+      <div class="wrap page-nav">
+        <a class="pn glass" href="index.html">
+          <span class="dir">&larr; Overview</span>
+          <span class="name">All tools</span>
+        </a>
+        <a class="pn right glass" href="termiagent.html">
+          <span class="dir">Next &rarr;</span>
+          <span class="name">TermiAgent</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>Terminal Toolkit — two open-source tools for the terminal-native developer.</span>
+      <span class="mono">MIT Licensed &middot; No tracking &middot; No cookies</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
