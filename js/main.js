@@ -186,7 +186,7 @@
     });
   }
 
-  /* ================= 7. Wobbly windows (Compiz-style spring) ================= */
+  /* ================= 7. Wobbly windows (spring physics) ================= */
   if (!reduced && finePointer) {
     $$("[data-wobble]").forEach(function (win) {
       var hero = win.closest(".hero");
@@ -503,9 +503,9 @@
   }
 
   var BOOT = [
-    "[    0.000000] gnome-shell 46: entering stage ...",
-    "[    0.041262] yaru: theme loaded (dark)",
-    "[    0.102388] blur-my-shell: pipelines connected",
+    "[    0.000000] spatial-shell: entering stage ...",
+    "[    0.041262] ui-theme: loaded (auto)",
+    "[    0.102388] frost-blur: pipelines connected",
     "[    0.175445] wobbly-windows: springs armed",
     "[    0.250912] ready."
   ];
@@ -616,5 +616,34 @@
       b.addEventListener("mouseleave", function () { b.style.translate = ""; });
     });
   }
+
+  /* ================= 13. Theme toggle (dark/light, persisted) ================= */
+  (function themeToggle() {
+    var KEY = "tt-theme";
+    var root = document.documentElement;
+    var stored = null;
+    try { stored = localStorage.getItem(KEY); } catch (e) {}
+    var prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+    var theme = stored === "light" || stored === "dark"
+      ? stored
+      : (prefersLight ? "light" : "dark");
+    root.setAttribute("data-theme", theme);
+
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "theme-toggle";
+    btn.setAttribute("aria-label", "Toggle color theme");
+    btn.innerHTML =
+      '<svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7"/></svg>' +
+      '<svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.4 14.2A8.3 8.3 0 0 1 9.8 3.6a8.3 8.3 0 1 0 10.6 10.6z"/></svg>';
+    var host = document.querySelector(".wm-right") || document.querySelector(".nav");
+    if (host) host.insertBefore(btn, host.firstChild);
+
+    btn.addEventListener("click", function () {
+      theme = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+      root.setAttribute("data-theme", theme);
+      try { localStorage.setItem(KEY, theme); } catch (e) {}
+    });
+  })();
 
 })();
