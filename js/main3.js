@@ -20,7 +20,7 @@
     var sy = window.scrollY || window.pageYOffset;
     var h = document.documentElement;
     var max = h.scrollHeight - h.clientHeight;
-    if (bar) bar.style.width = (max > 0 ? (sy / max) * 100 : 0) + "%";
+    if (bar) bar.style.transform = "scaleX(" + (max > 0 ? sy / max : 0) + ")";
     if (nav) nav.classList.toggle("scrolled", sy > 12);
     if (topBtn) topBtn.classList.toggle("show", sy > 640);
     if (!reduced) {
