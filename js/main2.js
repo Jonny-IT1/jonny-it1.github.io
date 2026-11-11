@@ -294,7 +294,7 @@
           var lim = linkDist * linkDist;
           if (d2 < lim) {
             var a = (1 - Math.sqrt(d2) / linkDist) * 0.22;
-            ctx.strokeStyle = "rgba(120, 160, 255," + a.toFixed(3) + ")";
+            ctx.strokeStyle = "rgba(227, 184, 92," + a.toFixed(3) + ")";
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);

@@ -1132,3 +1132,109 @@ a.fseg { transition: color 0.2s, background 0.2s; }
   .marquee-track { animation: none; transform: none; }
   .cursor-glow { display: none; }
 }
+
+/* ---------- 25. Motion upgrade (v2, 11.11.2026) ----------
+   Alles wie die Linux-Vorlage plus GNOME-Extras:
+   Fenster-Map-Animation, Idle-Float, rotierender Conic-Rahmen,
+   Sheen-Sweep, Eyebrow-Puls, Logo-Herzschlag, Workspace-Dock-
+   Magnification und Wallpaper-Drift. */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* GNOME maps windows in with a scale+fade; afterwards a gentle idle float */
+.hero-visual .term {
+  animation:
+    winOpen 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.2s backwards,
+    floaty 6.5s ease-in-out 1s infinite;
+}
+@keyframes winOpen {
+  from { opacity: 0; transform: translateY(26px) scale(0.94); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes floaty {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -10px; }
+}
+.term.is-wobble { animation: none; }
+
+/* light sheen sweeping across the CSD window (Blur-my-Shell feel) */
+.term::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.055) 50%, transparent 58%);
+  transform: translateX(-130%);
+  animation: sheen 9s ease-in-out infinite;
+}
+@keyframes sheen {
+  0%, 55% { transform: translateX(-130%); }
+  80%, 100% { transform: translateX(130%); }
+}
+
+/* rotating conic border on project cards */
+.proj-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.2px;
+  background: conic-gradient(from var(--angle), transparent 0%, var(--ubuntu-orange) 12%, #ffb84d 20%, var(--ubuntu-violet) 28%, transparent 38%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+  animation: spinBorder 4.5s linear infinite;
+}
+@keyframes spinBorder {
+  to { --angle: 360deg; }
+}
+.proj-card:hover::before { opacity: 1; }
+
+/* pulsing status dot on eyebrow pills */
+.eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--a1);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--a1) 80%, transparent);
+  animation: pulseDot 2.2s ease-in-out infinite;
+  flex: none;
+}
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.75); }
+}
+
+/* logo heartbeat */
+.brand .logo {
+  animation: logoPulse 5s ease-in-out infinite;
+}
+@keyframes logoPulse {
+  0%, 100% { box-shadow: 0 0 14px -2px color-mix(in srgb, var(--ubuntu-orange) 55%, transparent); }
+  50% { box-shadow: 0 0 26px 2px color-mix(in srgb, var(--ubuntu-orange) 85%, transparent); }
+}
+
+/* workspace pills behave like the GNOME dash: springy magnification */
+@media (hover: hover) {
+  .nav-links a {
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.2s;
+  }
+  .nav-links a:hover { transform: scale(1.09); }
+}
+
+/* the wallpaper breathes, like an animated GNOME background */
+.bg {
+  animation: wallDrift 40s ease-in-out infinite alternate;
+}
+@keyframes wallDrift {
+  from { background-position: 0% 0%; }
+  to { background-position: 3% -2%; }
+}

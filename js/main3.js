@@ -195,7 +195,7 @@
       var px = 0, py = 0;   /* current offset */
       var vx = 0, vy = 0;   /* velocity */
       var raf = null;
-      var K = 0.12;         /* spring stiffness */
+      var K = 0.14;         /* spring stiffness */
       var D = 0.70;         /* damping: < 1 => overshoot wobble */
 
       function loop() {
@@ -203,7 +203,7 @@
         vy = (vy + (ty - py) * K) * D;
         px += vx;
         py += vy;
-        var rot = Math.max(-5, Math.min(5, vx * 0.85));
+        var rot = Math.max(-8, Math.min(8, vx * 1.05));
         win.style.transform =
           "translate(" + px.toFixed(2) + "px," + py.toFixed(2) + "px) rotate(" +
           rot.toFixed(2) + "deg)";
@@ -213,6 +213,7 @@
           raf = requestAnimationFrame(loop);
         } else {
           raf = null;
+          win.classList.remove("is-wobble");
           win.style.transform = "";
         }
       }
@@ -230,6 +231,25 @@
         tx = 0;
         ty = 0;
         kick();
+      });
+    });
+  }
+
+  /* ================= 7b. 3D tilt on project cards (subtle) ================= */
+  if (!reduced && finePointer) {
+    $$("[data-tilt]").forEach(function (el) {
+      var strength = 3;
+      el.style.transformStyle = "preserve-3d";
+      el.addEventListener("mousemove", function (ev) {
+        var r = el.getBoundingClientRect();
+        var x = (ev.clientX - r.left) / r.width - 0.5;
+        var y = (ev.clientY - r.top) / r.height - 0.5;
+        el.style.transform =
+          "perspective(900px) rotateX(" + (-y * strength).toFixed(2) + "deg) rotateY(" +
+          (x * strength).toFixed(2) + "deg) translateY(-5px)";
+      });
+      el.addEventListener("mouseleave", function () {
+        el.style.transform = "";
       });
     });
   }
