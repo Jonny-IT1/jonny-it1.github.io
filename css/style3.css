@@ -38,7 +38,7 @@
   --a2: #7cc7ff;
   --green: #8ff0a4;
   --red: #f66151;
-  --nav-h: 36px;
+  --nav-h: 56px;
   --font-display: "Ubuntu", "Cantarell", "Segoe UI", system-ui, sans-serif;
   --font-body: "Ubuntu", "Cantarell", "Segoe UI", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "Ubuntu Mono", ui-monospace, monospace;
@@ -222,18 +222,18 @@ body.cursor-on .cursor-glow { opacity: 1; }
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  padding: 0 14px;
+  gap: 11px;
+  padding: 0 18px;
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: 0.86rem;
+  font-size: 1.0rem;
   letter-spacing: 0.01em;
   color: var(--text);
   white-space: nowrap;
 }
 .brand .logo {
-  width: 22px; height: 22px;
-  border-radius: 7px;
+  width: 27px; height: 27px;
+  border-radius: 8px;
   display: grid;
   place-items: center;
   background: linear-gradient(135deg, #ff8a4a, var(--ubuntu-amber));
@@ -244,14 +244,14 @@ body.cursor-on .cursor-glow { opacity: 1; }
 .brand:hover .logo { transform: scale(1.08) rotate(-4deg); filter: brightness(1.14); }
 
 /* workspace pills */
-.nav-links { display: flex; align-items: center; gap: 6px; padding: 0 10px; }
+.nav-links { display: flex; align-items: center; gap: 7px; padding: 0 12px; }
 .nav-links a {
   display: inline-flex;
   align-items: center;
-  padding: 5px 14px;
+  padding: 8px 17px;
   font-family: var(--font-mono);
   font-weight: 500;
-  font-size: 0.78rem;
+  font-size: 0.88rem;
   border-radius: var(--radius-pill);
   color: var(--muted);
   background: rgba(255, 255, 255, 0.055);
@@ -274,10 +274,10 @@ body.cursor-on .cursor-glow { opacity: 1; }
 .clock {
   display: inline-flex;
   align-items: center;
-  padding: 0 12px;
+  padding: 0 14px;
   font-family: var(--font-mono);
   font-weight: 600;
-  font-size: 0.78rem;
+  font-size: 0.88rem;
   color: var(--text);
   letter-spacing: 0.03em;
   white-space: nowrap;
@@ -285,11 +285,11 @@ body.cursor-on .cursor-glow { opacity: 1; }
 }
 
 .nav-gh {
-  width: 40px;
+  width: 46px;
   display: grid;
   place-items: center;
   border-radius: var(--radius-pill);
-  margin: 4px 6px;
+  margin: 6px 8px;
   color: var(--muted);
   transition: color 0.25s, background 0.25s;
   flex: none;
@@ -301,7 +301,7 @@ body.cursor-on .cursor-glow { opacity: 1; }
 
 .nav-toggle {
   display: none;
-  width: 40px;
+  width: 46px;
   border: none;
   background: transparent;
   color: var(--text);
