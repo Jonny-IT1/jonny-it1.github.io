@@ -1,11 +1,11 @@
 /* ============================================================
    Terminal Toolkit — ContextCraft × TermiAgent
-   GNOME / Ubuntu variant "YARU NEBULA": premium dark relaunch.
-   Deep-space plum wallpaper with aurora mesh + vignette,
-   gradient hairlines, glowing Ubuntu accents, frosted CSD
-   windows (Blur my Shell), wobbly windows, pill buttons,
-   overview-style reveals, window map-in, idle float, sheen,
-   conic card borders, dock magnification, wallpaper drift.
+   GNOME variant "ONYX TERMINAL" (v5): modern black glass with
+   Linux accents — near-black wallpaper with green/cyan/orange
+   glows, lightly translucent frosted panels, terminal-style
+   mono labels (cursor eyebrow, mono buttons/chips/nav),
+   plus the full motion pack (wobble, winOpen, floaty, sheen,
+   conic borders, dock magnification, magnetic buttons).
    ============================================================ */
 
 /* ---------- 1. Tokens & reset ---------- */
@@ -15,27 +15,27 @@
 
 :root {
   /* deep-space Yaru dark surfaces */
-  --bg: #0d0a13;
-  --bg-2: #14101d;
-  --panel: rgba(28, 24, 40, 0.52);
-  --panel-solid: #1c1826;
-  --headerbar: rgba(44, 38, 58, 0.62);
-  --text: #f5f2ff;
-  --muted: rgba(245, 242, 255, 0.66);
-  --dim: rgba(245, 242, 255, 0.40);
+  --bg: #060708;
+  --bg-2: #0b0c0e;
+  --panel: rgba(255, 255, 255, 0.045);
+  --panel-solid: #0f1114;
+  --headerbar: rgba(12, 14, 17, 0.62);
+  --text: #eef1f3;
+  --muted: rgba(230, 234, 238, 0.66);
+  --dim: rgba(230, 234, 238, 0.40);
   --line: rgba(255, 255, 255, 0.075);
   --line-strong: rgba(255, 255, 255, 0.14);
   --radius: 14px;
   --radius-pill: 999px;
   --shadow: 0 18px 44px -16px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  --shadow-big: 0 40px 90px -36px rgba(0, 0, 0, 0.75), 0 0 60px -30px rgba(165, 109, 226, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --shadow-big: 0 40px 90px -36px rgba(0, 0, 0, 0.75), 0 0 60px -30px rgba(124, 199, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   --blur: blur(24px) saturate(1.5);
-  /* Ubuntu Yaru accents */
+  /* Ubuntu accents (terminal palette) */
   --ubuntu-orange: #e95420;
-  --ubuntu-violet: #a56de2;
-  /* page accent: vivid ember + luminous violet */
-  --a1: #ff7a45;
-  --a2: #b58af5;
+  --ubuntu-amber: #ffb454;
+  /* page accent: terminal green + cyan */
+  --a1: #4ade80;
+  --a2: #7cc7ff;
   --green: #8ff0a4;
   --red: #f66151;
   --nav-h: 36px;
@@ -45,7 +45,7 @@
 }
 
 body[data-accent="cc"] { --a1: #3ec9b7; --a2: #9ac8ff; }
-body[data-accent="ta"] { --a1: #d38de9; --a2: #ff8a5c; }
+body[data-accent="ta"] { --a1: #56d364; --a2: #ff8a5c; }
 
 html { scroll-behavior: smooth; }
 
@@ -86,11 +86,11 @@ button:focus-visible {
   z-index: -2;
   overflow: hidden;
   background:
-    radial-gradient(1100px 760px at 12% -8%, rgba(88, 44, 160, 0.40), transparent 60%),
+    radial-gradient(1100px 760px at 12% -8%, rgba(74, 222, 128, 0.10), transparent 60%),
     radial-gradient(900px 680px at 104% 12%, rgba(233, 84, 32, 0.16), transparent 55%),
-    radial-gradient(1000px 900px at 50% 118%, rgba(165, 109, 226, 0.22), transparent 62%),
-    radial-gradient(760px 620px at 86% 78%, rgba(216, 88, 180, 0.12), transparent 60%),
-    linear-gradient(180deg, #100c18 0%, #0b0910 42%, #0e0a15 100%);
+    radial-gradient(1000px 900px at 50% 118%, rgba(124, 199, 255, 0.10), transparent 62%),
+    radial-gradient(760px 620px at 86% 78%, rgba(233, 84, 32, 0.07), transparent 60%),
+    linear-gradient(180deg, #0a0c0e 0%, #060708 42%, #090b0d 100%);
 }
 /* vignette + ultra-fine film grain for depth */
 .bg::after {
@@ -99,7 +99,7 @@ button:focus-visible {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(130% 95% at 50% 8%, transparent 52%, rgba(5, 3, 10, 0.6) 100%),
+    radial-gradient(130% 95% at 50% 8%, transparent 52%, rgba(3, 4, 6, 0.6) 100%),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
 }
 
@@ -114,18 +114,18 @@ button:focus-visible {
 }
 .bg .orb.o1 {
   width: 560px; height: 560px;
-  background: rgba(150, 100, 255, 0.30);
+  background: rgba(74, 222, 128, 0.14);
   top: -160px; left: 5vw;
 }
 .bg .orb.o2 {
   width: 480px; height: 480px;
-  background: rgba(255, 106, 56, 0.18);
+  background: rgba(233, 84, 32, 0.12);
   top: 24vh; right: 1vw;
   animation-delay: -8s;
 }
 .bg .orb.o3 {
   width: 420px; height: 420px;
-  background: rgba(216, 88, 180, 0.16);
+  background: rgba(124, 199, 255, 0.12);
   bottom: -120px; left: 32vw;
   animation-delay: -15s;
 }
@@ -182,7 +182,7 @@ body.cursor-on .cursor-glow { opacity: 1; }
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-  background: rgba(13, 10, 20, 0.55);
+  background: rgba(8, 9, 12, 0.55);
   -webkit-backdrop-filter: blur(22px) saturate(1.6);
   backdrop-filter: blur(22px) saturate(1.6);
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
@@ -236,7 +236,7 @@ body.cursor-on .cursor-glow { opacity: 1; }
   border-radius: 7px;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, #ff8a4a, var(--ubuntu-violet));
+  background: linear-gradient(135deg, #ff8a4a, var(--ubuntu-amber));
   color: #fff;
   flex: none;
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s;
@@ -249,9 +249,9 @@ body.cursor-on .cursor-glow { opacity: 1; }
   display: inline-flex;
   align-items: center;
   padding: 5px 14px;
-  font-family: var(--font-body);
+  font-family: var(--font-mono);
   font-weight: 500;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   border-radius: var(--radius-pill);
   color: var(--muted);
   background: rgba(255, 255, 255, 0.055);
@@ -275,9 +275,9 @@ body.cursor-on .cursor-glow { opacity: 1; }
   display: inline-flex;
   align-items: center;
   padding: 0 12px;
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 0.82rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.78rem;
   color: var(--text);
   letter-spacing: 0.03em;
   white-space: nowrap;
@@ -332,10 +332,11 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate
   gap: 9px;
   padding: 13px 26px;
   border-radius: var(--radius-pill);
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 0.95rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.88rem;
   line-height: 1;
+  letter-spacing: 0.01em;
   cursor: pointer;
   border: none;
   transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), translate 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s, background 0.22s, filter 0.22s, color 0.22s;
@@ -395,16 +396,15 @@ section::before {
 
 .section-head { max-width: 720px; margin-bottom: clamp(34px, 5vw, 56px); }
 
-/* GNOME pill badge eyebrow */
+/* GNOME pill badge eyebrow — terminal prompt style */
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-family: var(--font-body);
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
+  gap: 9px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
   color: var(--a1);
   background: color-mix(in srgb, var(--a1) 14%, transparent);
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--a1) 32%, transparent), 0 0 22px -8px color-mix(in srgb, var(--a1) 55%, transparent);
@@ -541,7 +541,7 @@ canvas.net {
 /* ---------- 9. Frosted CSD window (Blur my Shell, premium) ---------- */
 .term {
   border-radius: var(--radius);
-  background: rgba(18, 15, 26, 0.66);
+  background: rgba(8, 10, 13, 0.62);
   -webkit-backdrop-filter: var(--blur);
   backdrop-filter: var(--blur);
   border: 1px solid rgba(255, 255, 255, 0.10);
@@ -595,11 +595,11 @@ canvas.net {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, #ff8a4a, var(--a1));
+  background: linear-gradient(135deg, #56d364, #2ea043);
   color: #fff;
   font-size: 13px;
   line-height: 1;
-  font-family: var(--font-body);
+  font-family: var(--font-mono);
   cursor: default;
   box-shadow: 0 2px 10px -2px color-mix(in srgb, var(--a1) 70%, transparent);
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.2s;
@@ -614,7 +614,7 @@ canvas.net {
   line-height: 1.8;
   min-height: 300px;
   background:
-    radial-gradient(90% 50% at 50% 0%, rgba(165, 109, 226, 0.05), transparent 70%);
+    radial-gradient(90% 50% at 50% 0%, rgba(124, 199, 255, 0.05), transparent 70%);
 }
 .term-body.tight { min-height: 240px; }
 
@@ -662,7 +662,7 @@ canvas.net {
 @media (hover: hover) {
   .glass:hover {
     border-color: color-mix(in srgb, var(--a1) 30%, rgba(255, 255, 255, 0.16));
-    background: rgba(34, 29, 48, 0.56);
+    background: rgba(255, 255, 255, 0.07);
     transform: translateY(-3px);
     box-shadow: 0 26px 58px -24px rgba(0, 0, 0, 0.7), 0 0 44px -16px color-mix(in srgb, var(--a1) 30%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   }
@@ -723,7 +723,7 @@ canvas.net {
   flex: none;
 }
 .cc-theme { background: linear-gradient(135deg, #3ec9b7, #8ff0a4); box-shadow: 0 10px 34px -10px rgba(62, 201, 183, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.25); }
-.ta-theme { background: linear-gradient(135deg, #d38de9, #ff7a45); box-shadow: 0 10px 34px -10px rgba(211, 141, 233, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.25); }
+.ta-theme { background: linear-gradient(135deg, #56d364, #ff8a5c); box-shadow: 0 10px 34px -10px rgba(255, 138, 92, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.25); }
 .proj-card:hover .icon-big { transform: scale(1.08) rotate(-5deg); }
 
 .proj-card h3 {
@@ -737,7 +737,7 @@ canvas.net {
 /* GNOME pill chips */
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip {
-  font-family: var(--font-body);
+  font-family: var(--font-mono);
   font-weight: 500;
   font-size: 0.76rem;
   padding: 5px 13px;
@@ -749,7 +749,7 @@ canvas.net {
 }
 .chip.c1 { color: #9df3b2; background: rgba(143, 240, 164, 0.08); box-shadow: inset 0 0 0 1px rgba(143, 240, 164, 0.18); }
 .chip.c2 { color: #a8d4ff; background: rgba(153, 193, 241, 0.08); box-shadow: inset 0 0 0 1px rgba(153, 193, 241, 0.18); }
-.chip.c3 { color: #e2a4ee; background: rgba(220, 138, 221, 0.08); box-shadow: inset 0 0 0 1px rgba(220, 138, 221, 0.18); }
+.chip.c3 { color: #ffb185; background: rgba(255, 145, 90, 0.08); box-shadow: inset 0 0 0 1px rgba(255, 145, 90, 0.18); }
 .chip.c4 { color: #ffd29a; background: rgba(255, 190, 111, 0.08); box-shadow: inset 0 0 0 1px rgba(255, 190, 111, 0.18); }
 
 .proj-actions {
@@ -895,7 +895,7 @@ canvas.net {
 /* ---------- 15. Code blocks ---------- */
 .code {
   position: relative;
-  background: rgba(13, 11, 19, 0.72);
+  background: rgba(10, 11, 14, 0.72);
   -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
   border: 1px solid var(--line-strong);
@@ -909,12 +909,12 @@ canvas.net {
 }
 .code pre { font-family: inherit; }
 /* GNOME Builder dark syntax palette, tuned for the nebula backdrop */
-.code .cm { color: rgba(245, 242, 255, 0.42); }
-.code .k { color: #e2a4ee; }
+.code .cm { color: rgba(230, 234, 238, 0.42); }
+.code .k { color: #ffb185; }
 .code .s { color: #9df3b2; }
 .code .f { color: #a8d4ff; }
 .code .n { color: #ffd29a; }
-.code .p { color: #d38de9; }
+.code .p { color: #56d364; }
 
 .copy-btn {
   position: absolute;
@@ -948,7 +948,7 @@ canvas.net {
   padding: 14px 22px;
   border-radius: var(--radius-pill);
   border: 1px solid var(--line-strong);
-  background: rgba(26, 22, 37, 0.6);
+  background: rgba(255, 255, 255, 0.04);
   -webkit-backdrop-filter: var(--blur);
   backdrop-filter: var(--blur);
   font-family: var(--font-mono);
@@ -1030,7 +1030,7 @@ canvas.net {
 /* ---------- 20. Footer ---------- */
 footer {
   border-top: 1px solid rgba(255, 255, 255, 0.04);
-  background: rgba(11, 9, 17, 0.6);
+  background: rgba(7, 8, 10, 0.6);
   -webkit-backdrop-filter: blur(20px) saturate(1.4);
   backdrop-filter: blur(20px) saturate(1.4);
   position: relative;
@@ -1089,7 +1089,7 @@ a.fseg { transition: color 0.2s, background 0.2s; }
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: rgba(30, 26, 42, 0.72);
+  background: rgba(12, 14, 17, 0.72);
   -webkit-backdrop-filter: blur(16px) saturate(1.3);
   backdrop-filter: blur(16px) saturate(1.3);
   border: 1px solid var(--line-strong);
@@ -1147,7 +1147,7 @@ a.fseg { transition: color 0.2s, background 0.2s; }
     align-items: stretch;
     gap: 4px;
     padding: 10px;
-    background: rgba(22, 18, 32, 0.88);
+    background: rgba(9, 10, 13, 0.9);
     -webkit-backdrop-filter: blur(26px) saturate(1.5);
     backdrop-filter: blur(26px) saturate(1.5);
     border: 1px solid var(--line-strong);
@@ -1264,7 +1264,7 @@ a.fseg { transition: color 0.2s, background 0.2s; }
   inset: 0;
   border-radius: inherit;
   padding: 1.2px;
-  background: conic-gradient(from var(--angle), transparent 0%, var(--ubuntu-orange) 12%, var(--a1) 20%, var(--ubuntu-violet) 28%, transparent 38%);
+  background: conic-gradient(from var(--angle), transparent 0%, var(--ubuntu-orange) 12%, var(--a1) 20%, var(--ubuntu-amber) 28%, transparent 38%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
@@ -1279,20 +1279,20 @@ a.fseg { transition: color 0.2s, background 0.2s; }
 }
 .proj-card:hover::before { opacity: 1; }
 
-/* pulsing status dot on eyebrow pills */
+/* blinking block cursor on eyebrow prompts (terminal schreibweise) */
 .eyebrow::before {
   content: "";
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
+  width: 8px;
+  height: 14px;
+  border-radius: 2px;
   background: var(--a1);
   box-shadow: 0 0 10px color-mix(in srgb, var(--a1) 80%, transparent);
-  animation: pulseDot 2.2s ease-in-out infinite;
+  animation: blinkCursor 1.1s steps(2, start) infinite;
   flex: none;
 }
-@keyframes pulseDot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.45; transform: scale(0.75); }
+@keyframes blinkCursor {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0.18; }
 }
 
 /* logo heartbeat */
