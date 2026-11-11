@@ -1,8 +1,9 @@
 /* ============================================================
    Terminal Toolkit — ContextCraft × TermiAgent
    AURUM · dark luxe editorial design system
-   v3 relaunch: champagne-gold palette, serif display,
-   refined glass, warm glows
+   v4 obsidian pass: more black, less brown — neutral
+   near-black surfaces, champagne gold kept as the accent,
+   copper/terracotta shifted to cool platinum / dusty rose
    ============================================================ */
 
 /* ---------- 0. Animated custom property ---------- */
@@ -18,21 +19,21 @@
 *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #0c0a07;
-  --bg-2: #14110b;
-  --panel: rgba(28, 23, 15, 0.72);
-  --panel-solid: #17130d;
-  --text: #f3eee3;
-  --muted: #b0a78f;
-  --dim: #6e6654;
-  --line: rgba(243, 238, 227, 0.09);
+  --bg: #060608;
+  --bg-2: #0b0b0e;
+  --panel: rgba(14, 14, 18, 0.72);
+  --panel-solid: #0e0e12;
+  --text: #f2f2f3;
+  --muted: #a9a9b2;
+  --dim: #66666e;
+  --line: rgba(242, 242, 243, 0.09);
   --line-strong: rgba(232, 200, 119, 0.34);
   --gold: rgba(232, 200, 119, 0.14);
   --radius: 16px;
   --a1: #e3b85c; /* champagne gold */
-  --a2: #c9824e; /* burnished copper */
+  --a2: #a9b6c9; /* cool platinum */
   --a3: #a8b98a; /* sage */
-  --a4: #d98a7e; /* terracotta rose */
+  --a4: #d399a6; /* dusty rose */
   --nav-h: 72px;
   --font-display: "Fraunces", Georgia, "Times New Roman", serif;
   --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
@@ -40,7 +41,7 @@
 }
 
 body[data-accent="cc"] { --a1: #efd79b; --a2: #e3b85c; }
-body[data-accent="ta"] { --a1: #d98a7e; --a2: #e3b85c; }
+body[data-accent="ta"] { --a1: #d399a6; --a2: #e3b85c; }
 
 html { scroll-behavior: smooth; }
 
@@ -76,8 +77,8 @@ button:focus-visible {
   overflow: hidden;
   background:
     radial-gradient(1250px 850px at 85% -12%, rgba(227, 184, 92, 0.11), transparent 62%),
-    radial-gradient(1000px 720px at -12% 34%, rgba(201, 130, 78, 0.10), transparent 62%),
-    radial-gradient(920px 620px at 52% 132%, rgba(217, 138, 126, 0.07), transparent 60%),
+    radial-gradient(1000px 720px at -12% 34%, rgba(169, 182, 201, 0.10), transparent 62%),
+    radial-gradient(920px 620px at 52% 132%, rgba(211, 153, 166, 0.07), transparent 60%),
     var(--bg);
 }
 
@@ -101,8 +102,8 @@ button:focus-visible {
   will-change: transform, translate;
 }
 .bg .orb.o1 { width: 480px; height: 480px; background: rgba(227, 184, 92, 0.16); top: -110px; left: 7vw; }
-.bg .orb.o2 { width: 420px; height: 420px; background: rgba(201, 130, 78, 0.14); top: 26vh; right: 5vw; animation-delay: -8s; }
-.bg .orb.o3 { width: 340px; height: 340px; background: rgba(217, 138, 126, 0.11); bottom: -90px; left: 37vw; animation-delay: -15s; }
+.bg .orb.o2 { width: 420px; height: 420px; background: rgba(169, 182, 201, 0.14); top: 26vh; right: 5vw; animation-delay: -8s; }
+.bg .orb.o3 { width: 340px; height: 340px; background: rgba(211, 153, 166, 0.11); bottom: -90px; left: 37vw; animation-delay: -15s; }
 
 @keyframes drift {
   to { transform: translate(70px, 50px) scale(1.1); }
@@ -112,8 +113,8 @@ button:focus-visible {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(243, 238, 227, 0.028) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(243, 238, 227, 0.028) 1px, transparent 1px);
+    linear-gradient(rgba(242, 242, 243, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(242, 242, 243, 0.028) 1px, transparent 1px);
   background-size: 56px 56px;
   -webkit-mask-image: radial-gradient(ellipse 95% 65% at 50% 0%, #000 35%, transparent 78%);
   mask-image: radial-gradient(ellipse 95% 65% at 50% 0%, #000 35%, transparent 78%);
@@ -164,7 +165,7 @@ body.cursor-on .cursor-glow { opacity: 1; }
   border-bottom: 1px solid transparent;
 }
 .nav.scrolled {
-  background: rgba(12, 10, 7, 0.82);
+  background: rgba(6, 6, 8, 0.82);
   -webkit-backdrop-filter: blur(18px) saturate(1.2);
   backdrop-filter: blur(18px) saturate(1.2);
   border-bottom-color: var(--line);
@@ -186,13 +187,13 @@ body.cursor-on .cursor-glow { opacity: 1; }
   display: grid;
   place-items: center;
   background: linear-gradient(135deg, var(--a1), var(--a2));
-  box-shadow: 0 0 22px rgba(227, 184, 92, 0.35), 0 0 22px rgba(201, 130, 78, 0.22);
+  box-shadow: 0 0 22px rgba(227, 184, 92, 0.35), 0 0 22px rgba(169, 182, 201, 0.22);
   animation: logoPulse 5s ease-in-out infinite;
   flex: none;
 }
 @keyframes logoPulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(227, 184, 92, 0.32), 0 0 20px rgba(201, 130, 78, 0.2); }
-  50% { box-shadow: 0 0 34px rgba(227, 184, 92, 0.55), 0 0 34px rgba(201, 130, 78, 0.35); }
+  0%, 100% { box-shadow: 0 0 20px rgba(227, 184, 92, 0.32), 0 0 20px rgba(169, 182, 201, 0.2); }
+  50% { box-shadow: 0 0 34px rgba(227, 184, 92, 0.55), 0 0 34px rgba(169, 182, 201, 0.35); }
 }
 
 /* --- links: editorial underline --- */
@@ -235,7 +236,7 @@ body.cursor-on .cursor-glow { opacity: 1; }
   display: grid;
   place-items: center;
   border: 1px solid var(--line);
-  background: rgba(243, 238, 227, 0.03);
+  background: rgba(242, 242, 243, 0.03);
   color: var(--muted);
   transition: color 0.25s, border-color 0.25s, background 0.25s, transform 0.25s, box-shadow 0.25s;
   flex: none;
@@ -255,7 +256,7 @@ body.cursor-on .cursor-glow { opacity: 1; }
   height: 42px;
   border-radius: 11px;
   border: 1px solid var(--line);
-  background: rgba(243, 238, 227, 0.03);
+  background: rgba(242, 242, 243, 0.03);
   color: var(--text);
   cursor: pointer;
   flex-direction: column;
@@ -300,7 +301,7 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate
   position: relative;
   overflow: hidden;
   background: linear-gradient(135deg, #f0d190, var(--a1) 55%, var(--a2));
-  color: #211708;
+  color: #14100a;
   box-shadow: 0 12px 38px -12px rgba(227, 184, 92, 0.65);
 }
 .btn-primary::before {
@@ -487,7 +488,7 @@ section { padding-block: clamp(56px, 9vw, 110px); }
   position: absolute;
   inset: -8%;
   z-index: -1;
-  background: radial-gradient(closest-side, rgba(227, 184, 92, 0.18), rgba(201, 130, 78, 0.10), transparent 75%);
+  background: radial-gradient(closest-side, rgba(227, 184, 92, 0.18), rgba(169, 182, 201, 0.10), transparent 75%);
   filter: blur(30px);
 }
 
@@ -515,7 +516,7 @@ canvas.net {
 /* ---------- 9. Terminal window ---------- */
 .term {
   border-radius: 16px;
-  background: linear-gradient(180deg, rgba(30, 25, 16, 0.92), rgba(20, 16, 10, 0.94));
+  background: linear-gradient(180deg, rgba(16, 16, 20, 0.92), rgba(10, 10, 13, 0.94));
   border: 1px solid rgba(232, 200, 119, 0.16);
   overflow: hidden;
   box-shadow:
@@ -538,13 +539,13 @@ canvas.net {
   gap: 8px;
   padding: 13px 18px;
   border-bottom: 1px solid rgba(232, 200, 119, 0.12);
-  background: rgba(243, 238, 227, 0.025);
+  background: rgba(242, 242, 243, 0.025);
 }
 .dots { display: flex; gap: 7px; }
 .dots span { width: 11px; height: 11px; border-radius: 50%; }
 .dots span:nth-child(1) { background: #e3b85c; }
-.dots span:nth-child(2) { background: #c9824e; }
-.dots span:nth-child(3) { background: #d98a7e; }
+.dots span:nth-child(2) { background: #a9b6c9; }
+.dots span:nth-child(3) { background: #d399a6; }
 
 .term-title {
   margin-left: auto;
@@ -569,9 +570,9 @@ canvas.net {
 .term-body .ln { white-space: pre-wrap; word-break: break-word; }
 .term-body .ln .p { color: var(--a1); margin-right: 8px; }
 .term-body .ln.ok { color: #9fc79a; }
-.term-body .ln.dim { color: #6e6654; }
+.term-body .ln.dim { color: #66666e; }
 .term-body .ln.warn { color: #e3b85c; }
-.term-body .ln.hl { color: #f3eee3; }
+.term-body .ln.hl { color: #f2f2f3; }
 
 .caret {
   display: inline-block;
@@ -590,7 +591,7 @@ canvas.net {
   overflow: hidden;
   border-radius: var(--radius);
   border: 1px solid var(--line);
-  background: linear-gradient(180deg, rgba(243, 238, 227, 0.045), rgba(243, 238, 227, 0.015));
+  background: linear-gradient(180deg, rgba(242, 242, 243, 0.045), rgba(242, 242, 243, 0.015));
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
   transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), border-color 0.35s, box-shadow 0.35s;
@@ -633,7 +634,7 @@ canvas.net {
   border-radius: 13px;
   display: grid;
   place-items: center;
-  color: #211708;
+  color: #14100a;
   background: linear-gradient(135deg, #f0d190, var(--a1) 55%, var(--a2));
   box-shadow: 0 8px 26px -8px rgba(227, 184, 92, 0.7);
   transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -680,12 +681,12 @@ canvas.net {
   border-radius: 17px;
   display: grid;
   place-items: center;
-  color: #211708;
+  color: #14100a;
   transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
   flex: none;
 }
 .cc-theme { background: linear-gradient(135deg, #f0d190, #e3b85c); box-shadow: 0 0 44px -10px rgba(227, 184, 92, 0.65); }
-.ta-theme { background: linear-gradient(135deg, #d98a7e, #c9824e); box-shadow: 0 0 44px -10px rgba(217, 138, 126, 0.6); }
+.ta-theme { background: linear-gradient(135deg, #d399a6, #a9b6c9); box-shadow: 0 0 44px -10px rgba(211, 153, 166, 0.6); }
 .proj-card:hover .icon-big { transform: rotate(-6deg) scale(1.06); }
 
 .proj-card h3 {
@@ -704,13 +705,13 @@ canvas.net {
   border-radius: 999px;
   border: 1px solid var(--line);
   color: var(--muted);
-  background: rgba(243, 238, 227, 0.03);
+  background: rgba(242, 242, 243, 0.03);
   white-space: nowrap;
 }
 .chip.c1 { color: #f0d190; border-color: rgba(227, 184, 92, 0.32); background: rgba(227, 184, 92, 0.07); }
 .chip.c2 { color: #b9c99a; border-color: rgba(168, 185, 138, 0.32); background: rgba(168, 185, 138, 0.07); }
-.chip.c3 { color: #eec39a; border-color: rgba(201, 130, 78, 0.32); background: rgba(201, 130, 78, 0.07); }
-.chip.c4 { color: #e6a898; border-color: rgba(217, 138, 126, 0.32); background: rgba(217, 138, 126, 0.07); }
+.chip.c3 { color: #c7d2e2; border-color: rgba(169, 182, 201, 0.32); background: rgba(169, 182, 201, 0.07); }
+.chip.c4 { color: #dba8b4; border-color: rgba(211, 153, 166, 0.32); background: rgba(211, 153, 166, 0.07); }
 
 .proj-actions {
   margin-top: auto;
@@ -741,7 +742,7 @@ canvas.net {
   display: grid;
   place-items: center;
   border: 1px solid var(--line);
-  background: rgba(243, 238, 227, 0.03);
+  background: rgba(242, 242, 243, 0.03);
   color: var(--muted);
   transition: color 0.25s, border-color 0.25s, background 0.25s, transform 0.25s, box-shadow 0.25s;
   flex: none;
@@ -846,7 +847,7 @@ canvas.net {
 /* ---------- 15. Code blocks ---------- */
 .code {
   position: relative;
-  background: linear-gradient(180deg, rgba(26, 21, 13, 0.9), rgba(17, 14, 9, 0.94));
+  background: linear-gradient(180deg, rgba(12, 12, 15, 0.9), rgba(8, 8, 11, 0.94));
   border: 1px solid rgba(232, 200, 119, 0.14);
   border-radius: 14px;
   padding: 22px 24px;
@@ -856,11 +857,11 @@ canvas.net {
   overflow-x: auto;
 }
 .code pre { font-family: inherit; }
-.code .cm { color: #6e6654; }
-.code .k { color: #d98a7e; }
+.code .cm { color: #66666e; }
+.code .k { color: #d399a6; }
 .code .s { color: #a8b98a; }
 .code .f { color: #e3b85c; }
-.code .n { color: #c9824e; }
+.code .n { color: #a9b6c9; }
 .code .p { color: #efd79b; }
 
 .copy-btn {
@@ -872,7 +873,7 @@ canvas.net {
   padding: 7px 13px;
   border-radius: 9px;
   border: 1px solid var(--line);
-  background: rgba(243, 238, 227, 0.05);
+  background: rgba(242, 242, 243, 0.05);
   color: var(--muted);
   font-family: var(--font-mono);
   font-size: 0.72rem;
@@ -1031,7 +1032,7 @@ footer::before {
   border-radius: 12px;
   display: grid;
   place-items: center;
-  background: rgba(20, 17, 11, 0.85);
+  background: rgba(10, 10, 13, 0.85);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border: 1px solid var(--line);
@@ -1095,7 +1096,7 @@ footer::before {
     gap: 4px;
     padding: 12px;
     border-radius: 14px;
-    background: rgba(18, 15, 10, 0.96);
+    background: rgba(9, 9, 12, 0.96);
     -webkit-backdrop-filter: blur(18px) saturate(1.2);
     backdrop-filter: blur(18px) saturate(1.2);
     border: 1px solid var(--line);
@@ -1112,7 +1113,7 @@ footer::before {
     pointer-events: auto;
   }
   .nav-links a { padding: 13px 16px; border-radius: 10px; font-size: 0.98rem; }
-  .nav-links a:hover { background: rgba(243, 238, 227, 0.05); }
+  .nav-links a:hover { background: rgba(242, 242, 243, 0.05); }
   .nav-links a::after { display: none; }
   .nav-links a.active {
     background: rgba(227, 184, 92, 0.08);
