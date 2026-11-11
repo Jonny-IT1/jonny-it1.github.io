@@ -734,6 +734,9 @@ canvas.net {
 .csd-close {
   width: 24px;
   height: 24px;
+  padding: 0;
+  border: 0;
+  appearance: none;
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -742,7 +745,7 @@ canvas.net {
   font-size: 13px;
   line-height: 1;
   font-family: var(--font-mono);
-  cursor: default;
+  cursor: pointer;
   box-shadow: 0 2px 10px -2px color-mix(in srgb, var(--a1) 70%, transparent);
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.2s;
 }
@@ -1592,4 +1595,177 @@ a.fseg { transition: color 0.2s, background 0.2s, translate 0.25s cubic-bezier(0
 @keyframes headBreath {
   0%, 100% { box-shadow: inset 0 -14px 26px -22px color-mix(in srgb, var(--a2) 55%, transparent); }
   50% { box-shadow: inset 0 -18px 32px -20px color-mix(in srgb, var(--a2) 80%, transparent); }
+}
+
+/* ---------- 27. Easter egg & fun pack (11.11.2026) ----------
+   Neun versteckte Eier plus Basisstyles dafuer: Terminal-Schliessen mit
+   Genie-Animation und Wiederherstellen-Chip, Konami-Party, getippte
+   Woerter, Phosphor-Terminal, Glitch, Logo-Spin, Konfetti, Toasts
+   und Klick-Wellen. Alles transform/opacity-only. */
+
+/* Terminal laesst sich "ernsthaft" schliessen */
+.term.is-closed {
+  animation: termGenieClose 0.55s cubic-bezier(0.55, 0, 0.85, 0.4) forwards;
+  pointer-events: none;
+}
+@keyframes termGenieClose {
+  0% { opacity: 1; transform: none; }
+  55% { opacity: 0.65; transform: translateY(-10px) scale(1.05) rotate(-1deg); }
+  100% { opacity: 0; transform: translateY(20px) scale(0.5) rotate(2deg); visibility: hidden; }
+}
+.term.is-reopening {
+  animation: winOpen 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Wiederherstellen-Chip erscheint unter dem geschlossenen Fenster */
+.term-restore {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  margin: 10px auto 0;
+  padding: 9px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px dashed color-mix(in srgb, var(--a1) 55%, transparent);
+  background: color-mix(in srgb, var(--a1) 10%, transparent);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.25s, box-shadow 0.25s;
+}
+.term-restore.show { display: flex; }
+.term-restore:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--a1) 85%, transparent);
+  box-shadow: 0 8px 22px -8px color-mix(in srgb, var(--a1) 70%, transparent);
+}
+.term-restore svg { animation: restoreBob 2.2s ease-in-out infinite; }
+@keyframes restoreBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(2px); }
+}
+
+/* Toast-Pill unten Mitte (z-Index-Stufe 200) */
+.ee-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  translate: -50% 0;
+  z-index: 200;
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--panel-solid) 82%, transparent);
+  backdrop-filter: blur(16px) saturate(1.5);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px) scale(0.94);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s;
+  box-shadow: var(--shadow-float);
+}
+.ee-toast.show { opacity: 1; transform: translateY(0) scale(1); }
+.ee-toast.out { opacity: 0; transform: translateY(8px) scale(0.96); }
+
+/* Konfetti (transform/opacity only) */
+.ee-cf {
+  position: fixed;
+  width: 8px;
+  height: 12px;
+  z-index: 100;
+  border-radius: 2px;
+  pointer-events: none;
+  animation: eeConfetti 0.9s cubic-bezier(0.16, 0.84, 0.44, 1) forwards;
+}
+@keyframes eeConfetti {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+  100% { transform: translate(var(--tx, 0px), calc(var(--ty, -80px) + 150px)) rotate(var(--rot, 180deg)); opacity: 0; }
+}
+
+/* Klick-Wellen auf Buttons und Pills */
+.ee-ripple-host { position: relative; overflow: hidden; }
+.ee-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--a1) 35%, transparent);
+  pointer-events: none;
+  animation: eeRipple 0.6s ease-out forwards;
+}
+@keyframes eeRipple {
+  from { transform: scale(0); opacity: 0.5; }
+  to { transform: scale(1); opacity: 0; }
+}
+
+/* Party-Modus: Orbs tanzen (Konami) */
+body.ee-party .bg .orb { animation: partyDance 2.2s ease-in-out infinite; }
+@keyframes partyDance {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  25% { transform: translate3d(34px, -26px, 0) scale(1.28); }
+  50% { transform: translate3d(-28px, 20px, 0) scale(0.86); }
+  75% { transform: translate3d(24px, 30px, 0) scale(1.16); }
+}
+
+/* Phosphor-Modus: Terminal wird gruen und rastert (Wort: matrix) */
+.term.ee-matrix .term-body .ln { color: #6BFF8F; }
+.term.ee-matrix .term-body .ln.dim { color: #3FBF6C; }
+.term.ee-matrix .term-head .term-title { color: #6BFF8F; }
+.term.ee-matrix::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  border-radius: inherit;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.25) 0 1px, transparent 1px 3px);
+  animation: matrixFlicker 0.14s steps(2, end) infinite;
+}
+@keyframes matrixFlicker {
+  0% { opacity: 0.85; }
+  100% { opacity: 0.65; }
+}
+
+/* Wobble-Impuls per getipptem Wort */
+.ee-shake { animation: eeShake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97); }
+@keyframes eeShake {
+  10%, 90% { transform: rotate(-1.6deg); }
+  20%, 80% { transform: rotate(2.2deg) translateY(-4px); }
+  30%, 50%, 70% { transform: rotate(-3deg); }
+  40%, 60% { transform: rotate(3deg) translateY(-6px); }
+}
+
+/* Glitch auf dem Hero-Titel (5 Klicks) */
+.ee-glitch { animation: eeGlitch 0.9s steps(2, end) both; }
+@keyframes eeGlitch {
+  0%, 100% { transform: none; opacity: 1; }
+  10% { transform: translate(-3px, 2px); opacity: 0.8; }
+  20% { transform: translate(4px, -2px); }
+  30% { transform: translate(-5px, 1px) skewX(-2deg); opacity: 0.9; }
+  40% { transform: translate(3px, 2px); }
+  50% { transform: translate(-2px, -3px) skewX(2deg); opacity: 0.75; }
+  60% { transform: translate(5px, 0); }
+  70% { transform: translate(-4px, 2px); opacity: 0.85; }
+  80% { transform: translate(2px, -2px); }
+  90% { transform: translate(-1px, 1px); }
+}
+
+/* Logo-Spin (Wort: boost) */
+.ee-spin { animation: eeSpin 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes eeSpin {
+  0% { transform: rotate(0) scale(1); }
+  70% { transform: rotate(360deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+/* Uhr ist klickbar (Formate-Umschaltung) */
+.ee-clickable { cursor: pointer; user-select: none; }
+
+/* Stats heben sich sanft beim Hover */
+.stat { transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@media (hover: hover) {
+  .stat:hover { transform: translateY(-4px); }
 }
