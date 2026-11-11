@@ -33,9 +33,9 @@
   /* Ubuntu accents (terminal palette) */
   --ubuntu-orange: #e95420;
   --ubuntu-amber: #ffb454;
-  /* page accent: terminal green + cyan */
-  --a1: #4ade80;
-  --a2: #7cc7ff;
+  /* page accent: terminal cyan + amber (green out, Jonas 11.11.2026) */
+  --a1: #7cc7ff;
+  --a2: #ffb454;
   --green: #8ff0a4;
   --red: #f66151;
   --nav-h: 56px;
@@ -45,7 +45,7 @@
 }
 
 body[data-accent="cc"] { --a1: #3ec9b7; --a2: #9ac8ff; }
-body[data-accent="ta"] { --a1: #56d364; --a2: #ff8a5c; }
+body[data-accent="ta"] { --a1: #ff8a5c; --a2: #ffb454; }
 
 html { scroll-behavior: smooth; }
 
@@ -86,7 +86,7 @@ button:focus-visible {
   z-index: -2;
   overflow: hidden;
   background:
-    radial-gradient(1100px 760px at 12% -8%, rgba(74, 222, 128, 0.10), transparent 60%),
+    radial-gradient(1100px 760px at 12% -8%, rgba(124, 199, 255, 0.10), transparent 60%),
     radial-gradient(900px 680px at 104% 12%, rgba(233, 84, 32, 0.16), transparent 55%),
     radial-gradient(1000px 900px at 50% 118%, rgba(124, 199, 255, 0.10), transparent 62%),
     radial-gradient(760px 620px at 86% 78%, rgba(233, 84, 32, 0.07), transparent 60%),
@@ -114,7 +114,7 @@ button:focus-visible {
 }
 .bg .orb.o1 {
   width: 560px; height: 560px;
-  background: rgba(74, 222, 128, 0.14);
+  background: rgba(124, 199, 255, 0.14);
   top: -160px; left: 5vw;
 }
 .bg .orb.o2 {
@@ -595,7 +595,7 @@ canvas.net {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, #56d364, #2ea043);
+  background: linear-gradient(135deg, #ffb454, #e95420);
   color: #fff;
   font-size: 13px;
   line-height: 1;
@@ -722,8 +722,8 @@ canvas.net {
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   flex: none;
 }
-.cc-theme { background: linear-gradient(135deg, #3ec9b7, #8ff0a4); box-shadow: 0 10px 34px -10px rgba(62, 201, 183, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.25); }
-.ta-theme { background: linear-gradient(135deg, #56d364, #ff8a5c); box-shadow: 0 10px 34px -10px rgba(255, 138, 92, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.25); }
+.cc-theme { background: linear-gradient(135deg, #3ec9b7, #9ac8ff); box-shadow: 0 10px 34px -10px rgba(62, 201, 183, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.25); }
+.ta-theme { background: linear-gradient(135deg, #ff8a5c, #ffb454); box-shadow: 0 10px 34px -10px rgba(255, 138, 92, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.25); }
 .proj-card:hover .icon-big { transform: scale(1.08) rotate(-5deg); }
 
 .proj-card h3 {
@@ -914,7 +914,7 @@ canvas.net {
 .code .s { color: #9df3b2; }
 .code .f { color: #a8d4ff; }
 .code .n { color: #ffd29a; }
-.code .p { color: #56d364; }
+.code .p { color: #7cc7ff; }
 
 .copy-btn {
   position: absolute;
