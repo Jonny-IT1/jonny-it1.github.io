@@ -1,4 +1,4 @@
-/* Terminal Toolkit — interactions, animations & effects (v2) */
+/* Terminal Toolkit — interactions, animations & effects (v3) */
 (function () {
   "use strict";
 
@@ -593,5 +593,28 @@
   $$("[data-term]").forEach(function (body) {
     typeTerm(body, body.getAttribute("data-term"));
   });
+
+  /* ================= 12. Motion pack v3 (mouse parallax + magnetic buttons) ================= */
+  if (!reduced && finePointer) {
+    /* Orbs folgen der Maus auf der x-Achse, y bleibt beim Scroll-Parallax */
+    document.addEventListener("mousemove", function (ev) {
+      var nx = ev.clientX / window.innerWidth - 0.5;
+      orbs.forEach(function (o, i) {
+        var f = (i + 1) * 16;
+        o.style.setProperty("--ox", (nx * f).toFixed(1) + "px");
+      });
+    }, { passive: true });
+
+    /* Magnetische Buttons: CTA und Top-Button ziehen zur Maus */
+    $$(".btn-primary, .top-btn").forEach(function (b) {
+      b.addEventListener("mousemove", function (ev) {
+        var r = b.getBoundingClientRect();
+        var mx = (ev.clientX - r.left - r.width / 2) / r.width;
+        var my = (ev.clientY - r.top - r.height / 2) / r.height;
+        b.style.translate = (mx * 9).toFixed(1) + "px " + (my * 7).toFixed(1) + "px";
+      });
+      b.addEventListener("mouseleave", function () { b.style.translate = ""; });
+    });
+  }
 
 })();
